@@ -1,16 +1,10 @@
-########################
-# Custom Exceptions    #
-########################
-
-class OperationError(Exception):
-    """
-    Raised when a mathematical operation fails.
-    """
+class CalculatorError(Exception):
     pass
 
 
-class ValidationError(Exception):
-    """
-    Raised when input validation fails.
-    """
+class ValidationError(CalculatorError):
+    pass
+
+
+class OperationError(CalculatorError):
     pass
