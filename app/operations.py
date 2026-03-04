@@ -61,7 +61,6 @@ class Power(Operation):
 
     def execute(self, a: Decimal, b: Decimal) -> Decimal:
         self.validate_operands(a, b)
-        # Decimal ** Decimal is tricky for non-integers; use float fallback for now
         return Decimal(pow(float(a), float(b)))
 
 
