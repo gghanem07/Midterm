@@ -80,3 +80,7 @@ def calculator_repl():
             print("Error:", e)
         except Exception as e:
             print("Unexpected error:", e)
+
+
+if __name__ == "__main__":
+    calculator_repl()
