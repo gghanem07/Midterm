@@ -19,7 +19,7 @@ def calculator_repl():
 
         if command == "help":
             print("\nCommands:")
-            print(" add subtract multiply divide power root modulus intdiv")
+            print(" add subtract multiply divide power root modulus intdiv percentage ")
             print(" history clear undo redo save load")
             print(" exit")
             continue
@@ -72,7 +72,8 @@ def calculator_repl():
             result = calc.perform_operation(a, b)
 
             if isinstance(result, Decimal):
-                result = result.normalize()
+                s = format(result, "f").rstrip("0").rstrip(".")
+                result = s if s else "0"
 
             print("Result:", result)
 

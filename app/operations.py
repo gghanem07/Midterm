@@ -93,6 +93,10 @@ class IntegerDivision(Operation):
         self.validate_operands(a, b)
         return Decimal(a // b)
 
+class Percentage(Operation):
+    def execute(self, a: Decimal, b: Decimal) -> Decimal:
+        return (a / Decimal(100)) * b
+
 
 class OperationFactory:
     """Factory Pattern: create Operation objects by a string key."""
@@ -105,7 +109,8 @@ class OperationFactory:
         "power": Power,
         "root": Root,
         "modulus": Modulus,
-        "intdiv": IntegerDivision
+        "intdiv": IntegerDivision,
+        "percentage": Percentage,
     }
 
     @classmethod
