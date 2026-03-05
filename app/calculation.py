@@ -36,6 +36,7 @@ class Calculation:
                 else self._raise_invalid_root(x, y)
             ),
             "Modulus": lambda x, y: x % y if y != 0 else self._raise_mod_zero(),
+            "IntegerDivision": lambda x, y: x // y if y != 0 else self._raise_div_zero(),
         }
 
         op = operations.get(self.operation)
