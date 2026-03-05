@@ -72,8 +72,7 @@ def calculator_repl():
             result = calc.perform_operation(a, b)
 
             if isinstance(result, Decimal):
-                s = format(result, "f").rstrip("0").rstrip(".")
-                result = s if s else "0"
+                result = format(result, "f")
 
             print("Result:", result)
 
