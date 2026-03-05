@@ -74,6 +74,15 @@ class Root(Operation):
     def execute(self, a: Decimal, b: Decimal) -> Decimal:
         self.validate_operands(a, b)
         return Decimal(pow(float(a), 1 / float(b)))
+    
+class Modulus(Operation):
+    def validate_operands(self, a: Decimal, b: Decimal) -> None:
+        if b == 0:
+            raise ValidationError("Modulus by zero is not allowed")
+
+    def execute(self, a: Decimal, b: Decimal) -> Decimal:
+        self.validate_operands(a, b)
+        return a % b
 
 
 class OperationFactory:
@@ -86,6 +95,7 @@ class OperationFactory:
         "divide": Division,
         "power": Power,
         "root": Root,
+        "modulus": Modulus
     }
 
     @classmethod
