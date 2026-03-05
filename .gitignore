@@ -1,8 +1,10 @@
-venv/
 __pycache__/
 *.pyc
-.env
-
+.venv/
+venv/
 data/
 logs/
-*.log
+.coverage
+htmlcov/
+.pytest_cache/
+.env
