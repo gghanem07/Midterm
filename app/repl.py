@@ -63,12 +63,15 @@ def calculator_repl():
 
         try:
             op = OperationFactory.create_operation(command)
+        except ValueError:
+            print("Unknown command. Type 'help' to see available commands.")
+            continue
 
+        try:
             a = input("First number: ")
             b = input("Second number: ")
 
             calc.set_operation(op)
-
             result = calc.perform_operation(a, b)
 
             if isinstance(result, Decimal):
