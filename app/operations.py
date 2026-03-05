@@ -96,6 +96,10 @@ class IntegerDivision(Operation):
 class Percentage(Operation):
     def execute(self, a: Decimal, b: Decimal) -> Decimal:
         return (a / Decimal(100)) * b
+    
+class AbsoluteDifference(Operation):
+    def execute(self, a: Decimal, b: Decimal) -> Decimal:
+        return abs(a - b)
 
 
 class OperationFactory:
@@ -111,6 +115,7 @@ class OperationFactory:
         "modulus": Modulus,
         "intdiv": IntegerDivision,
         "percentage": Percentage,
+        "absdiff": AbsoluteDifference,
     }
 
     @classmethod

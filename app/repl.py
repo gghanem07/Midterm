@@ -19,7 +19,7 @@ def calculator_repl():
 
         if command == "help":
             print("\nCommands:")
-            print(" add subtract multiply divide power root modulus intdiv percentage ")
+            print(" add subtract multiply divide power root modulus intdiv percentage absdiff ")
             print(" history clear undo redo save load")
             print(" exit")
             continue
