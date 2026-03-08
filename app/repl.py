@@ -1,9 +1,13 @@
 from decimal import Decimal
 
+from colorama import Fore, Style, init
+
 from app.calculator import Calculator
 from app.exceptions import OperationError, ValidationError
 from app.history import AutoSaveObserver, LoggingObserver
 from app.operations import OperationFactory
+
+init(autoreset=True)
 
 
 def calculator_repl():
@@ -12,59 +16,60 @@ def calculator_repl():
     calc.add_observer(LoggingObserver())
     calc.add_observer(AutoSaveObserver(calc))
 
-    print("midterm-calc started. Type 'help' for commands.")
+    print(Fore.CYAN + "midterm-calc started. Type 'help' for commands.")
 
     while True:
         command = input("\nEnter command: ").strip().lower()
 
         if command == "help":
-            print("\nCommands:")
-            print(" add subtract multiply divide power root modulus intdiv percentage absdiff ")
+            print(Fore.YELLOW + "\nCommands:")
+            print(" add subtract multiply divide power root modulus intdiv percentage absdiff")
             print(" history clear undo redo save load")
             print(" exit")
             continue
 
         if command == "exit":
             calc.save_history()
-            print("Goodbye")
+            print(Fore.CYAN + "Goodbye")
             break
 
         if command == "history":
             history = calc.show_history()
             if not history:
-                print("No history")
+                print(Fore.YELLOW + "No history")
             else:
+                print(Fore.YELLOW + "Calculation History:")
                 for i, entry in enumerate(history, 1):
                     print(f"{i}. {entry}")
             continue
 
         if command == "clear":
             calc.clear_history()
-            print("History cleared")
+            print(Fore.YELLOW + "History cleared")
             continue
 
         if command == "undo":
-            print("Undone" if calc.undo() else "Nothing to undo")
+            print(Fore.YELLOW + ("Undone" if calc.undo() else "Nothing to undo"))
             continue
 
         if command == "redo":
-            print("Redone" if calc.redo() else "Nothing to redo")
+            print(Fore.YELLOW + ("Redone" if calc.redo() else "Nothing to redo"))
             continue
 
         if command == "save":
             calc.save_history()
-            print("History saved")
+            print(Fore.YELLOW + "History saved")
             continue
 
         if command == "load":
             calc.load_history()
-            print("History loaded")
+            print(Fore.YELLOW + "History loaded")
             continue
 
         try:
             op = OperationFactory.create_operation(command)
         except ValueError:
-            print("Unknown command. Type 'help' to see available commands.")
+            print(Fore.RED + "Unknown command. Type 'help' to see available commands.")
             continue
 
         try:
@@ -77,12 +82,12 @@ def calculator_repl():
             if isinstance(result, Decimal):
                 result = format(result, "f")
 
-            print("Result:", result)
+            print(Fore.GREEN + f"Result: {result}")
 
         except (ValidationError, OperationError) as e:
-            print("Error:", e)
+            print(Fore.RED + f"Error: {e}")
         except Exception as e:
-            print("Unexpected error:", e)
+            print(Fore.RED + f"Unexpected error: {e}")
 
 
 if __name__ == "__main__":
