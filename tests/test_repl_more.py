@@ -15,6 +15,7 @@ def test_repl_add_happy_path(monkeypatch, capsys, tmp_path: Path):
     calculator_repl()
     out = capsys.readouterr().out
     assert "Result:" in out
+    assert "5" in out
 
 
 def test_repl_clear_then_history(monkeypatch, capsys, tmp_path: Path):
