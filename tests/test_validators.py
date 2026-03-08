@@ -29,3 +29,17 @@ def test_validate_number_rejects_non_numeric_string():
 def test_validate_number_rejects_unsupported_type():
     with pytest.raises(ValidationError):
         InputValidator.validate_number(["10"])
+
+
+class DummyConfig:
+    decimal_precision = 2
+
+
+def test_validate_number_rejects_too_many_decimal_places():
+    with pytest.raises(ValidationError):
+        InputValidator.validate_number("1.234", DummyConfig())
+
+
+def test_validate_number_rejects_object_type():
+    with pytest.raises(ValidationError):
+        InputValidator.validate_number(object())
