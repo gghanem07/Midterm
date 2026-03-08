@@ -1,114 +1,119 @@
-# Enhanced Calculator Command-Line Application
+Midterm - Calculator Command-Line Application
 
-## Project Description
-This project is an enhanced calculator built as a command-line application using the REPL pattern (Read-Eval-Print Loop). It supports standard arithmetic operations as well as advanced operations such as power, root, modulus, integer division, percentage, and absolute difference.
+Overview
 
-The application also includes:
-- Factory Design Pattern for creating operations
-- Memento Design Pattern for undo/redo
-- Observer Design Pattern for logging and auto-save
-- CSV history persistence using pandas
-- Configuration management with `.env`
-- Automated testing with pytest and pytest-cov
-- GitHub Actions CI workflow
+The project is a Python-based command-line calculator application, the application
+supports multiple mathematical operations, persistent history storage,
+undo/redo functionality, environment-based configuration, logging, and
+automated testing with high coverage.
 
-## Features
-Supported commands:
-- `add`
-- `subtract`
-- `multiply`
-- `divide`
-- `power`
-- `root`
-- `modulus`
-- `intdiv`
-- `percentage`
-- `absdiff`
-- `history`
-- `clear`
-- `undo`
-- `redo`
-- `save`
-- `load`
-- `help`
-- `exit`
 
-## Installation Instructions
+Features
 
-### 1. Clone the repository
-```bash
-git clone https://github.com/gghanem07/Midterm.git
-cd Midterm
+Core Calculator Operations - Addition - Subtraction - Multiplication -
+Division - Power - Root - Modulus - Integer Division - Percentage -
+Absolute Difference
 
-## 2. create and activate a virtual environment: 
+History Management - Persistent history stored as CSV - History
+viewing - Clear history - Undo / redo operations
 
-python3 -m venv venv
-source venv/bin/activate
+Configuration - Environment variables using .env - Configurable history
+size - Configurable decimal precision - Configurable log and history
+directories
 
-## 3. install dependencies
+Logging - Logging of calculator events - Stored in logs/calculator.log
 
-pip install -r requirements.txt
+Data Handling - Uses pandas to store and manage calculation history -
+History saved to CSV automatically
 
-## 4.configuration setup: 
-create .env file in the project root: 
+Observers - Auto-save observer - Logging observer
 
-CALCULATOR_MAX_HISTORY_SIZE=100
-CALCULATOR_PRECISION=10
-CALCULATOR_LOG_DIR=logs
-CALCULATOR_HISTORY_DIR=data/history
+Command Line Interface - Interactive REPL (Read–Eval–Print Loop) -
+Color-coded output using Colorama
+
+Testing - Unit tests implemented with pytest - Coverage tracking with
+pytest-cov - Project coverage target ≥ 90%
+
+Project Structure
+
+app/ calculation.py calculator.py calculator_config.py
+calculator_memento.py exceptions.py history.py input_validators.py
+logger.py operations.py repl.py
+
+tests/ test_calculation.py test_calculation_more.py test_calculator.py
+test_config.py test_history.py test_operations.py test_repl.py
+test_repl_more.py test_validators.py
+
+data/ logs/
+
+requirements.txt README.md .env
+
+Installation
+
+1.  Clone the repository
+
+    git clone https://github.com/your-repository/Midterm.git 
+	cd Midterm
+
+2.  Create a virtual environment
+
+    python -m venv venv
+
+3.  Activate the environment
+
+ source venv/bin/activate
+
+Windows: venv
+
+4.  Install dependencies
+
+    pip install -r requirements.txt
+
+Running the Calculator
+
+Start the command-line calculator:
+
+    python -m app.repl
+
+Available Commands
+
+Math operations: - add - subtract - multiply - divide - power - root -
+modulus - intdiv - percentage - absdiff
+
+History commands: - history - clear - undo - redo - save - load
+
+System commands: - help - exit
+
+Environment Configuration (.env)
+
+Example .env file:
+
+CALCULATOR_MAX_HISTORY_SIZE=100 CALCULATOR_PRECISION=10
+CALCULATOR_LOG_DIR=logs CALCULATOR_HISTORY_DIR=data/history
 CALCULATOR_AUTO_SAVE=true
 
-## 5. Usage guide: 
-to run the calculator use: 
+Running Tests
 
-python -m app.repl
-python main.py
+Run all tests:
 
-## 6. History and Persistence
-view calculator history: history
-clear calculator history: clear
-Undo and redo are supported with: undo and undo 
-History can be saved to CSV: save 
-History can be loaded from CSV: load
+    pytest
+
+Run tests with coverage:
+
+    pytest --cov=app --cov-report=term-missing
 
 
+CI/CD information:
 
-## 7. Testing:
- run all tests:
-pytest
+GitHub Actions automatically runs tests and coverage checks on each push
+to ensure the project remains stable and meets quality requirements.
 
-run with rest coverage:
-pytest --cov=app --cov-report=term-missing
+tools Used
 
-
-## 8. CI/CD pipeline:
-GitHub Actions is configured to automatically: 
-- install dependencies 
-- run tests 
-- check code coverage 
-the workflow file is located at: 
-
-.github/workflows/python-app.yml
-
-## 9. project structure: 
-
-Midterm/
-├── app/
-│   ├── __init__.py
-│   ├── calculator.py
-│   ├── calculation.py
-│   ├── calculator_config.py
-│   ├── calculator_memento.py
-│   ├── exceptions.py
-│   ├── history.py
-│   ├── input_validators.py
-│   ├── logger.py
-│   ├── operations.py
-│   └── repl.py
-├── tests/
-├── .env
-├── .gitignore
-├── README.md
-├── requirements.txt
-├── main.py
-└── .github/workflows/python-app.yml
+-   Python
+-   pandas
+-   numpy
+-   pytest
+-   pytest-cov
+-   python-dotenv
+-   colorama
