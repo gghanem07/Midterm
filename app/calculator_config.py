@@ -1,12 +1,17 @@
 from dataclasses import dataclass
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 
 @dataclass
 class CalculatorConfig:
     base_dir: Path
-    max_history_size: int = 100
-    decimal_precision: int = 10
+    max_history_size: int = int(os.getenv("CALCULATOR_MAX_HISTORY_SIZE", "100"))
+    decimal_precision: int = int(os.getenv("CALCULATOR_PRECISION", "10"))
 
     @property
     def data_dir(self) -> Path:
@@ -28,13 +33,6 @@ class CalculatorConfig:
     def log_file(self) -> Path:
         return self.logs_dir / "calculator.log"
 
-    def validate(self) -> None:
-        _ = self.data_dir
-        _ = self.logs_dir
-        _ = self.log_file
-        _ = self.history_dir
-        _ = self.history_file
-    
     @property
     def history_dir(self) -> Path:
         p = self.data_dir / "history"
@@ -44,3 +42,10 @@ class CalculatorConfig:
     @property
     def history_file(self) -> Path:
         return self.history_dir / "history.csv"
+
+    def validate(self) -> None:
+        _ = self.data_dir
+        _ = self.logs_dir
+        _ = self.log_file
+        _ = self.history_dir
+        _ = self.history_file
